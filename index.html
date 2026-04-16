@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>✨ Guia de Química — Ensino Médio</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blush:      #f7c5d0;
+    --blush-deep: #f0a0b8;
+    --lavender:   #d8cff5;
+    --lav-deep:   #b8a9e8;
+    --mint:       #c2ead8;
+    --mint-deep:  #8fd4b2;
+    --ivory:      #fdf8f4;
+    --cream:      #faf3ee;
+    --text:       #3d2e40;
+    --text-soft:  #7a6080;
+    --white:      #ffffff;
+    --shadow:     0 4px 24px rgba(120,80,140,0.10);
+    --shadow-sm:  0 2px 10px rgba(120,80,140,0.07);
+    --radius:     20px;
+    --radius-sm:  12px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--ivory);
+    color: var(--text);
+    line-height: 1.7;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(253,248,244,0.88);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1.5px solid var(--blush);
+    padding: 0 2rem;
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    height: 62px; gap: 1rem;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .logo span { color: var(--lav-deep); }
+
+  nav { display: flex; gap: .35rem; flex-wrap: wrap; }
+  nav a {
+    font-size: .78rem; font-weight: 500;
+    text-decoration: none;
+    color: var(--text-soft);
+    background: var(--cream);
+    border: 1.5px solid transparent;
+    padding: .3rem .75rem;
+    border-radius: 50px;
+    transition: all .2s;
+    white-space: nowrap;
+  }
+  nav a:hover {
+    background: var(--lavender);
+    border-color: var(--lav-deep);
+    color: var(--text);
+  }
+
+  /* ── LAYOUT ── */
+  main {
+    max-width: 820px; margin: 0 auto;
+    padding: 2.5rem 1.25rem 5rem;
+    display: flex; flex-direction: column; gap: 2.5rem;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    text-align: center;
+    background: linear-gradient(135deg, #fce4ec 0%, #ede7f6 50%, #e0f7ef 100%);
+    border-radius: var(--radius);
+    padding: 3rem 2rem 2.5rem;
+    box-shadow: var(--shadow);
+    position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23d8cff5' fill-opacity='0.25'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.9rem, 5vw, 2.8rem);
+    line-height: 1.2; margin-bottom: .75rem;
+  }
+  .hero p {
+    color: var(--text-soft); font-size: .95rem;
+    max-width: 480px; margin: 0 auto;
+  }
+  .badges {
+    display: flex; flex-wrap: wrap; gap: .5rem;
+    justify-content: center; margin-top: 1.25rem;
+  }
+  .badge {
+    font-size: .75rem; font-weight: 600;
+    padding: .3rem .9rem; border-radius: 50px;
+    letter-spacing: .03em;
+  }
+  .badge-pink   { background: var(--blush);   color: #9e4a6a; }
+  .badge-lav    { background: var(--lavender); color: #5a43a0; }
+  .badge-mint   { background: var(--mint);     color: #2a7a56; }
+
+  /* ── SECTION CARD ── */
+  .section-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .section-header {
+    padding: 1.4rem 1.75rem 1.1rem;
+    display: flex; align-items: center; gap: .9rem;
+    border-bottom: 1.5px solid var(--ivory);
+  }
+  .section-icon {
+    width: 44px; height: 44px; border-radius: 14px;
+    display: grid; place-items: center;
+    font-size: 1.35rem; flex-shrink: 0;
+  }
+  .ic-pink   { background: var(--blush); }
+  .ic-lav    { background: var(--lavender); }
+  .ic-mint   { background: var(--mint); }
+  .ic-yellow { background: #fff0c2; }
+
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem; font-weight: 600;
+  }
+  .section-body { padding: 1.5rem 1.75rem; }
+
+  /* ── CONTENT PIECES ── */
+  h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem; font-weight: 600;
+    color: var(--text); margin: 1.4rem 0 .55rem;
+  }
+  h3:first-child { margin-top: 0; }
+
+  p { margin-bottom: .7rem; color: var(--text-soft); }
+  p strong { color: var(--text); font-weight: 600; }
+
+  /* pill label */
+  .label {
+    display: inline-block;
+    font-size: .7rem; font-weight: 700; letter-spacing: .06em;
+    text-transform: uppercase;
+    padding: .15rem .6rem; border-radius: 50px;
+    margin-bottom: .4rem;
+  }
+  .label-pink   { background: var(--blush);   color: #9e4a6a; }
+  .label-lav    { background: var(--lavender); color: #5a43a0; }
+  .label-mint   { background: var(--mint);     color: #2a7a56; }
+  .label-yellow { background: #fff0c2;         color: #8a6400; }
+
+  /* comparison grid */
+  .grid-2 {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+    margin: .75rem 0;
+  }
+  .grid-3 {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: .85rem;
+    margin: .75rem 0;
+  }
+  @media(max-width: 600px) {
+    .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+  .card-mini {
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.1rem;
+    font-size: .875rem;
+  }
+  .card-mini h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: .95rem; margin-bottom: .35rem; color: var(--text);
+  }
+  .card-mini p { margin: 0; font-size: .82rem; }
+  .cm-pink   { background: #fdf0f4; border: 1.5px solid var(--blush); }
+  .cm-lav    { background: #f4f0fd; border: 1.5px solid var(--lavender); }
+  .cm-mint   { background: #f0fdf7; border: 1.5px solid var(--mint); }
+  .cm-yellow { background: #fdfbf0; border: 1.5px solid #ffe066; }
+
+  /* models timeline */
+  .timeline { display: flex; flex-direction: column; gap: .75rem; margin: .75rem 0; }
+  .tl-item {
+    display: flex; gap: 1rem; align-items: flex-start;
+  }
+  .tl-dot {
+    width: 34px; height: 34px; border-radius: 50%;
+    display: grid; place-items: center;
+    font-size: 1rem; flex-shrink: 0; margin-top: .15rem;
+  }
+  .tl-content { flex: 1; }
+  .tl-content strong { font-size: .9rem; color: var(--text); }
+  .tl-content span { font-size: .82rem; color: var(--text-soft); display: block; }
+
+  /* separation methods table */
+  .sep-table { width: 100%; border-collapse: collapse; margin: .75rem 0; font-size: .85rem; }
+  .sep-table th {
+    background: var(--lavender);
+    color: var(--text);
+    font-weight: 600;
+    padding: .55rem .9rem;
+    text-align: left;
+  }
+  .sep-table th:first-child { border-radius: var(--radius-sm) 0 0 0; }
+  .sep-table th:last-child  { border-radius: 0 var(--radius-sm) 0 0; }
+  .sep-table td {
+    padding: .5rem .9rem;
+    border-bottom: 1px solid #f0ecfa;
+    color: var(--text-soft);
+  }
+  .sep-table tr:last-child td { border-bottom: none; }
+  .sep-table tr:nth-child(even) td { background: #faf8fe; }
+
+  /* step box */
+  .step-box {
+    background: linear-gradient(135deg, #fdf0f4, #f4f0fd);
+    border: 1.5px solid var(--blush);
+    border-radius: var(--radius-sm);
+    padding: 1.1rem 1.25rem;
+    margin: .85rem 0;
+    font-size: .88rem;
+  }
+  .step-box .step-title {
+    font-weight: 700; color: var(--text); margin-bottom: .5rem; font-size: .9rem;
+  }
+  .step-box ol { padding-left: 1.3rem; color: var(--text-soft); }
+  .step-box ol li { margin-bottom: .35rem; }
+  .step-box .result {
+    margin-top: .6rem; padding: .5rem .8rem;
+    background: var(--white); border-radius: 8px;
+    font-weight: 600; color: var(--text);
+    border-left: 3px solid var(--lav-deep);
+    font-size: .88rem;
+  }
+
+  /* formula highlight */
+  .formula {
+    display: inline-block;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    background: #f4f0fd; border: 1px solid var(--lavender);
+    padding: .2rem .6rem; border-radius: 8px;
+    color: #5a43a0; font-size: .95rem;
+  }
+
+  /* cheatsheet pills */
+  .cheat-list { display: flex; flex-wrap: wrap; gap: .55rem; margin: .7rem 0; }
+  .cheat-pill {
+    background: var(--cream);
+    border: 1.5px solid var(--blush);
+    border-radius: 50px;
+    padding: .3rem 1rem;
+    font-size: .8rem; font-weight: 500;
+    color: var(--text);
+    display: flex; align-items: center; gap: .4rem;
+  }
+
+  /* divider */
+  .divider {
+    border: none; height: 1.5px;
+    background: linear-gradient(90deg, transparent, var(--blush), var(--lavender), transparent);
+    margin: 1.25rem 0;
+  }
+
+  /* ── QUIZ ── */
+  .quiz-section { display: flex; flex-direction: column; gap: .65rem; }
+
+  .quiz-q {
+    background: var(--cream);
+    border: 1.5px solid var(--blush);
+    border-radius: var(--radius-sm);
+    padding: 1rem 1.15rem;
+    transition: border-color .2s;
+  }
+  .quiz-q.correct { border-color: var(--mint-deep); background: #f0fdf7; }
+  .quiz-q.wrong   { border-color: #f4a5b5; background: #fff4f7; }
+
+  .quiz-q p.q-text {
+    font-weight: 600; color: var(--text);
+    margin-bottom: .6rem; font-size: .9rem;
+  }
+  .options { display: flex; flex-direction: column; gap: .35rem; }
+  .options label {
+    display: flex; align-items: center; gap: .55rem;
+    cursor: pointer; font-size: .85rem; color: var(--text-soft);
+    padding: .4rem .6rem; border-radius: 8px;
+    transition: background .15s;
+  }
+  .options label:hover { background: var(--lavender); color: var(--text); }
+  .options input[type="radio"] { accent-color: var(--lav-deep); }
+
+  .q-feedback {
+    font-size: .8rem; font-weight: 600;
+    margin-top: .5rem; padding: .35rem .7rem;
+    border-radius: 8px; display: none;
+  }
+  .q-feedback.show { display: block; }
+  .q-feedback.ok   { background: var(--mint); color: #2a7a56; }
+  .q-feedback.err  { background: #ffd6e0; color: #9e2a50; }
+
+  .quiz-btn {
+    align-self: flex-start;
+    background: linear-gradient(135deg, var(--blush-deep), var(--lav-deep));
+    color: var(--white);
+    border: none; cursor: pointer;
+    padding: .65rem 1.75rem;
+    border-radius: 50px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: .88rem; font-weight: 600;
+    box-shadow: 0 3px 12px rgba(180,120,200,.3);
+    transition: transform .15s, box-shadow .15s;
+    margin-top: .4rem;
+  }
+  .quiz-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(180,120,200,.4);
+  }
+  .quiz-score {
+    font-size: .9rem; font-weight: 600;
+    color: var(--text-soft); margin-top: .3rem;
+    display: none;
+  }
+  .quiz-score.show { display: block; }
+
+  /* ── SCROLLBAR ── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--ivory); }
+  ::-webkit-scrollbar-thumb { background: var(--blush-deep); border-radius: 10px; }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 700px) {
+    header { padding: 0 1rem; }
+    .header-inner { flex-direction: column; height: auto; padding: .6rem 0; gap: .5rem; }
+    nav { justify-content: center; }
+    main { padding: 1.5rem .75rem 4rem; }
+    .section-body { padding: 1.2rem 1.1rem; }
+    .hero { padding: 2rem 1.2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════ HEADER ══════════ -->
+<header>
+  <div class="header-inner">
+    <div class="logo">✦ Guia de <span>Química</span></div>
+    <nav>
+      <a href="#modelos">Modelos Atômicos</a>
+      <a href="#propriedades">Propriedades</a>
+      <a href="#misturas">Substâncias</a>
+      <a href="#estequiometria">Estequiometria</a>
+      <a href="#quiz">Quiz</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ══════════ MAIN ══════════ -->
+<main>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1>Química para o ENEM ✨</h1>
+    <p>Tudo que cai na prova — resumido, direto e com exemplos resolvidos. Foca aí!</p>
+    <div class="badges">
+      <span class="badge badge-pink">⚛️ Modelos Atômicos</span>
+      <span class="badge badge-lav">🧪 Estequiometria</span>
+      <span class="badge badge-mint">🔬 Substâncias & Misturas</span>
+    </div>
+  </div>
+
+  <!-- ══ 1. MODELOS ATÔMICOS ══ -->
+  <div class="section-card" id="modelos">
+    <div class="section-header">
+      <div class="section-icon ic-pink">⚛️</div>
+      <h2>Modelos Atômicos</h2>
+    </div>
+    <div class="section-body">
+      <p>Cada modelo foi uma evolução do anterior. A prova adora pedir <strong>qual modelo introduziu qual ideia</strong>.</p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-dot ic-pink">🔴</div>
+          <div class="tl-content">
+            <strong>Dalton (1808) — "Bola de Bilhar"</strong>
+            <span>Átomo é uma esfera maciça, indivisível e indestrutível. Não explica eletricidade.</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot ic-lav">🍮</div>
+          <div class="tl-content">
+            <strong>Thomson (1897) — "Pudim de Passas"</strong>
+            <span>Descobriu o elétron. Átomo é uma esfera positiva com elétrons espalhados (como passas no pudim).</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot ic-mint">☢️</div>
+          <div class="tl-content">
+            <strong>Rutherford (1911) — "Sistema Solar"</strong>
+            <span>Descobriu o núcleo (positivo, denso, pequeno). Elétrons giram ao redor em órbitas (eletrosfera). Não explica espectros.</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot ic-yellow">🪐</div>
+          <div class="tl-content">
+            <strong>Bohr (1913) — "Níveis de Energia"</strong>
+            <span>Elétrons só existem em níveis fixos (K, L, M…). Ao saltar de nível, absorvem ou emitem luz. Explica o espectro do hidrogênio.</span>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-dot" style="background:#e8e0ff;">🌀</div>
+          <div class="tl-content">
+            <strong>Modelo Quântico / Atual (1926+)</strong>
+            <span>Elétrons em <em>orbitais</em> (regiões de probabilidade). Não dá pra saber posição exata — Princípio da Incerteza de Heisenberg.</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="step-box">
+        <div class="step-title">💡 Dica de Prova — Experiência de Rutherford</div>
+        <ol>
+          <li>Partículas alfa atiradas contra uma folha de ouro.</li>
+          <li>A maioria <strong>passou direto</strong> → átomo é quase vazio.</li>
+          <li>Poucas foram <strong>desviadas ou rebatidas</strong> → existe um núcleo pequeno e positivo.</li>
+        </ol>
+        <div class="result">Conclusão: O átomo tem um núcleo central positivo e uma eletrosfera vazia ao redor.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 2. PROPRIEDADES DA MATÉRIA ══ -->
+  <div class="section-card" id="propriedades">
+    <div class="section-header">
+      <div class="section-icon ic-lav">🧲</div>
+      <h2>Propriedades da Matéria</h2>
+    </div>
+    <div class="section-body">
+
+      <div class="grid-2">
+        <div class="card-mini cm-pink">
+          <span class="label label-pink">Gerais</span>
+          <h4>Comuns a toda matéria</h4>
+          <p>Massa, volume, inércia, impenetrabilidade, divisibilidade, compressibilidade.</p>
+        </div>
+        <div class="card-mini cm-lav">
+          <span class="label label-lav">Específicas</span>
+          <h4>Identificam a substância</h4>
+          <p>Ponto de fusão, ponto de ebulição, densidade, solubilidade, dureza.</p>
+        </div>
+        <div class="card-mini cm-mint">
+          <span class="label label-mint">Físicas</span>
+          <h4>Sem mudança de substância</h4>
+          <p>Cor, brilho, odor, estado físico, ponto de fusão/ebulição, densidade.</p>
+        </div>
+        <div class="card-mini cm-yellow">
+          <span class="label label-yellow">Químicas</span>
+          <h4>Envolve transformação</h4>
+          <p>Combustibilidade, oxidação, fermentação, decomposição.</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h3>Transformações Físicas vs. Químicas</h3>
+      <div class="grid-2">
+        <div class="card-mini cm-mint">
+          <h4>⚡ Física</h4>
+          <p>Não cria nova substância. Ex: derreter gelo, rasgar papel, dissolver sal.</p>
+        </div>
+        <div class="card-mini cm-lav">
+          <h4>🔥 Química</h4>
+          <p>Cria nova substância. Sinais: chama, gás, cheiro, mudança de cor, precipitado.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ 3. SUBSTÂNCIAS & MISTURAS ══ -->
+  <div class="section-card" id="misturas">
+    <div class="section-header">
+      <div class="section-icon ic-mint">🔬</div>
+      <h2>Substâncias &amp; Misturas</h2>
+    </div>
+    <div class="section-body">
+
+      <div class="grid-2">
+        <div class="card-mini cm-pink">
+          <span class="label label-pink">Substância Simples</span>
+          <h4>1 único elemento</h4>
+          <p>O₂ (oxigênio), N₂ (nitrogênio), Fe (ferro), Cu (cobre).</p>
+        </div>
+        <div class="card-mini cm-lav">
+          <span class="label label-lav">Substância Composta</span>
+          <h4>2+ elementos diferentes</h4>
+          <p>H₂O (água), NaCl (sal), CO₂, C₁₂H₂₂O₁₁ (sacarose).</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h3>Misturas</h3>
+      <div class="grid-2">
+        <div class="card-mini cm-mint">
+          <span class="label label-mint">Homogênea</span>
+          <h4>Fase única (monofásica)</h4>
+          <p>Parece uniforme. Ex: água + sal, ar, bronze.</p>
+        </div>
+        <div class="card-mini cm-yellow">
+          <span class="label label-yellow">Heterogênea</span>
+          <h4>2+ fases visíveis</h4>
+          <p>Parece separada. Ex: água + óleo, areia + água, granito.</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h3>🗂️ Métodos de Separação — Cheat Sheet</h3>
+      <table class="sep-table">
+        <thead>
+          <tr>
+            <th>Método</th>
+            <th>Tipo de Mistura</th>
+            <th>Exemplo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Filtração</strong></td><td>Sólido + líquido (heterogênea)</td><td>Areia + água</td></tr>
+          <tr><td><strong>Decantação</strong></td><td>Sólido + líquido ou líq. + líq. (imiscíveis)</td><td>Óleo + água</td></tr>
+          <tr><td><strong>Destilação Simples</strong></td><td>Líquido + sólido solúvel</td><td>Água + sal</td></tr>
+          <tr><td><strong>Destilação Fracionada</strong></td><td>Líquidos miscíveis com PE diferentes</td><td>Álcool + água; Petróleo</td></tr>
+          <tr><td><strong>Centrifugação</strong></td><td>Sólido + líquido (partíc. finas)</td><td>Sangue</td></tr>
+          <tr><td><strong>Cromatografia</strong></td><td>Misturas com componentes de polaridade diferente</td><td>Pigmentos, tinta</td></tr>
+          <tr><td><strong>Cristalização/Evaporação</strong></td><td>Sólido dissolvido em líquido</td><td>Sal marinho</td></tr>
+          <tr><td><strong>Catação / Peneiração</strong></td><td>Sólidos de tamanhos diferentes</td><td>Pedras + areia</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ══ 4. ESTEQUIOMETRIA ══ -->
+  <div class="section-card" id="estequiometria">
+    <div class="section-header">
+      <div class="section-icon ic-yellow">⚗️</div>
+      <h2>Cálculo Estequiométrico</h2>
+    </div>
+    <div class="section-body">
+
+      <h3>⚖️ Leis Ponderais</h3>
+      <div class="grid-2">
+        <div class="card-mini cm-pink">
+          <span class="label label-pink">Lavoisier</span>
+          <h4>"Nada se cria, nada se perde"</h4>
+          <p>Massa dos reagentes = massa dos produtos.<br>
+          <span class="formula">m<sub>R</sub> = m<sub>P</sub></span></p>
+        </div>
+        <div class="card-mini cm-lav">
+          <span class="label label-lav">Proust</span>
+          <h4>"Proporções Definidas"</h4>
+          <p>Elementos se combinam em proporções fixas em massa. Sempre a mesma proporção para a mesma substância.</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h3>🔢 Mol, Massa e Volume — O Trio Essencial</h3>
+      <div class="grid-3">
+        <div class="card-mini cm-pink">
+          <h4>Massa Molar</h4>
+          <p><span class="formula">M = m / n</span><br>
+          M = g/mol (soma das massas atômicas)</p>
+        </div>
+        <div class="card-mini cm-lav">
+          <h4>Número de Mols</h4>
+          <p><span class="formula">n = m / M</span><br>
+          1 mol = 6,02×10²³ partículas</p>
+        </div>
+        <div class="card-mini cm-mint">
+          <h4>Volume (Gás — CNTP)</h4>
+          <p><span class="formula">V = n × 22,4 L</span><br>
+          Válido a 0 °C e 1 atm.</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+      <h3>📐 Cálculo Estequiométrico Passo a Passo</h3>
+
+      <div class="step-box">
+        <div class="step-title">Exemplo: Formação de Água</div>
+        <p style="margin-bottom:.6rem; color:var(--text-soft);">
+          <strong>2 H₂ + O₂ → 2 H₂O</strong><br>
+          Quantos gramas de H₂O se formam com <strong>4 g de H₂</strong>?
+        </p>
+        <ol>
+          <li><strong>Escreva a equação balanceada:</strong> 2 H₂ + O₂ → 2 H₂O</li>
+          <li><strong>Calcule massas molares:</strong> H₂ = 2 g/mol → H₂O = 18 g/mol</li>
+          <li><strong>Relação dos coeficientes (em massa):</strong><br>
+              2 mol H₂ = 4 g ↔ 2 mol H₂O = 36 g</li>
+          <li><strong>Regra de Três:</strong><br>
+              4 g H₂ ——— 36 g H₂O<br>
+              4 g H₂ ——— x<br>
+              x = (4 × 36) / 4 = <strong>36 g de H₂O</strong></li>
+        </ol>
+        <div class="result">✅ Resposta: 36 g de H₂O</div>
+      </div>
+
+      <hr class="divider">
+      <h3>⚠️ Reagente Limitante e em Excesso</h3>
+      <p>O <strong>reagente limitante</strong> é o que acaba primeiro e determina a quantidade de produto formado. O <strong>reagente em excesso</strong> sobra.</p>
+
+      <div class="step-box">
+        <div class="step-title">Exemplo: N₂ + H₂ → NH₃</div>
+        <p style="margin-bottom:.6rem; color:var(--text-soft);">
+          <strong>N₂ + 3 H₂ → 2 NH₃</strong><br>
+          Temos <strong>28 g de N₂</strong> e <strong>9 g de H₂</strong>. Qual é o limitante?
+        </p>
+        <ol>
+          <li>Massas molares: N₂ = 28 g/mol; H₂ = 2 g/mol</li>
+          <li>Mols disponíveis: N₂ = 28/28 = <strong>1 mol</strong> | H₂ = 9/2 = <strong>4,5 mol</strong></li>
+          <li>Proporção estequiométrica: 1 mol N₂ precisa de <strong>3 mol H₂</strong></li>
+          <li>Para 1 mol N₂ → precisa de 3 mol H₂. Temos 4,5 mol H₂ → <strong>H₂ está em excesso!</strong></li>
+          <li><strong>N₂ é o limitante.</strong> Com 1 mol N₂ → produz 2 mol NH₃ = 2 × 17 = 34 g NH₃</li>
+        </ol>
+        <div class="result">✅ Limitante: N₂ | Produto: 34 g de NH₃ | Excesso de H₂: 1,5 mol = 3 g</div>
+      </div>
+
+      <hr class="divider">
+      <h3>🔬 Pureza e Rendimento</h3>
+
+      <div class="grid-2">
+        <div class="card-mini cm-lav">
+          <h4>Pureza da Amostra</h4>
+          <p><span class="formula">m<sub>pura</sub> = m<sub>amostra</sub> × (% / 100)</span></p>
+          <p style="font-size:.8rem;">Use a massa pura nos cálculos estequiométricos.</p>
+        </div>
+        <div class="card-mini cm-mint">
+          <h4>Rendimento da Reação</h4>
+          <p><span class="formula">m<sub>real</sub> = m<sub>teórica</sub> × (% / 100)</span></p>
+          <p style="font-size:.8rem;">A prova diz "rendimento de X%": multiplique o teórico por X/100.</p>
+        </div>
+      </div>
+
+      <div class="step-box">
+        <div class="step-title">Exemplo Combinado — Pureza + Rendimento</div>
+        <p style="margin-bottom:.6rem; color:var(--text-soft);">
+          Calcular a massa de CaO produzida a partir de <strong>200 g de calcário (CaCO₃ 80% puro)</strong>, com <strong>rendimento de 75%</strong>.<br>
+          <strong>CaCO₃ → CaO + CO₂</strong>
+        </p>
+        <ol>
+          <li>Massa pura de CaCO₃: 200 × 0,80 = <strong>160 g</strong></li>
+          <li>Massa molar: CaCO₃ = 100 g/mol; CaO = 56 g/mol</li>
+          <li>Estequiometria: 100 g CaCO₃ → 56 g CaO</li>
+          <li>Regra de três: 160 g → x → x = (160 × 56)/100 = <strong>89,6 g (teórico)</strong></li>
+          <li>Rendimento: 89,6 × 0,75 = <strong>67,2 g de CaO (real)</strong></li>
+        </ol>
+        <div class="result">✅ Resposta: 67,2 g de CaO</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ QUIZ ══ -->
+  <div class="section-card" id="quiz">
+    <div class="section-header">
+      <div class="section-icon" style="background:#fce4ec;">📝</div>
+      <h2>Mini Quiz — Teste seus Conhecimentos</h2>
+    </div>
+    <div class="section-body">
+      <p>Responda todas as perguntas e clique em <strong>"Verificar Respostas"</strong>. Boa sorte! 🌸</p>
+      <div class="quiz-section" id="quizContainer"></div>
+      <button class="quiz-btn" onclick="checkQuiz()">Verificar Respostas ✨</button>
+      <div class="quiz-score" id="quizScore"></div>
+    </div>
+  </div>
+
+</main>
+
+<script>
+const questions = [
+  {
+    q: "Qual modelo atômico propôs que os elétrons ficam em NÍVEIS DE ENERGIA fixos?",
+    opts: ["Dalton", "Thomson", "Rutherford", "Bohr"],
+    ans: 3,
+    exp: "Bohr (1913) introduziu os níveis de energia K, L, M... para explicar o espectro do hidrogênio."
+  },
+  {
+    q: "A experiência com a folha de ouro levou à descoberta de:",
+    opts: ["O elétron", "O núcleo atômico", "Os orbitais", "Os nêutrons"],
+    ans: 1,
+    exp: "Rutherford descobriu o núcleo pequeno, denso e positivo ao observar o desvio das partículas alfa."
+  },
+  {
+    q: "Dissolver sal na água é uma transformação:",
+    opts: ["Química — cria nova substância", "Física — não cria nova substância", "Nuclear", "Biológica"],
+    ans: 1,
+    exp: "Física! O sal pode ser recuperado evaporando a água — nenhuma nova substância é formada."
+  },
+  {
+    q: "Para separar água e óleo, o melhor método é:",
+    opts: ["Filtração", "Destilação fracionada", "Decantação", "Cromatografia"],
+    ans: 2,
+    exp: "Decantação — líquidos imiscíveis (não se misturam) se separam por densidade em funil de separação."
+  },
+  {
+    q: "Na equação: 2 H₂ + O₂ → 2 H₂O, quantos gramas de O₂ reagem com 4 g de H₂? (H=1; O=16)",
+    opts: ["8 g", "16 g", "32 g", "4 g"],
+    ans: 2,
+    exp: "2 mol H₂ = 4 g reagem com 1 mol O₂ = 32 g. Regra de três: 4 g H₂ → 32 g O₂."
+  },
+  {
+    q: "A Lei de Lavoisier diz que:",
+    opts: [
+      "Elementos se combinam em proporções fixas",
+      "A massa dos reagentes é igual à dos produtos",
+      "O reagente limitante determina o produto",
+      "Toda reação libera energia"
+    ],
+    ans: 1,
+    exp: "'Nada se cria, nada se perde, tudo se transforma' — massa total é conservada."
+  },
+  {
+    q: "O2 (oxigênio) é classificado como:",
+    opts: ["Substância composta", "Mistura homogênea", "Substância simples", "Mistura heterogênea"],
+    ans: 2,
+    exp: "Substância simples — formada por apenas 1 elemento químico (oxigênio), mesmo tendo 2 átomos."
+  },
+  {
+    q: "Uma amostra de minério com 500 g tem 60% de pureza em CaCO₃. Qual a massa pura?",
+    opts: ["300 g", "200 g", "60 g", "500 g"],
+    ans: 0,
+    exp: "500 × (60/100) = 300 g de CaCO₃ puro. Sempre multiplique a massa total pela fração de pureza."
+  },
+  {
+    q: "No Modelo Quântico (atual), os elétrons ocupam:",
+    opts: ["Órbitas circulares fixas", "O núcleo junto com prótons", "Orbitais — regiões de probabilidade", "Camadas sem subnível"],
+    ans: 2,
+    exp: "Orbitais são regiões onde há maior probabilidade de encontrar o elétron — não se sabe a posição exata (Heisenberg)."
+  },
+  {
+    q: "Numa reação com rendimento de 80%, se a massa teórica é 50 g, a massa real obtida é:",
+    opts: ["80 g", "40 g", "10 g", "50 g"],
+    ans: 1,
+    exp: "50 × (80/100) = 40 g. O rendimento sempre reduz a quantidade teórica esperada."
+  }
+];
+
+function buildQuiz() {
+  const container = document.getElementById('quizContainer');
+  questions.forEach((item, i) => {
+    const div = document.createElement('div');
+    div.className = 'quiz-q';
+    div.id = `q${i}`;
+
+    let optHtml = item.opts.map((opt, j) => `
+      <label>
+        <input type="radio" name="q${i}" value="${j}"> ${opt}
+      </label>`).join('');
+
+    div.innerHTML = `
+      <p class="q-text">${i + 1}. ${item.q}</p>
+      <div class="options">${optHtml}</div>
+      <div class="q-feedback" id="fb${i}"></div>`;
+    container.appendChild(div);
+  });
+}
+
+function checkQuiz() {
+  let score = 0;
+  questions.forEach((item, i) => {
+    const sel = document.querySelector(`input[name="q${i}"]:checked`);
+    const qDiv = document.getElementById(`q${i}`);
+    const fb   = document.getElementById(`fb${i}`);
+
+    if (!sel) {
+      fb.textContent = '⚠️ Selecione uma opção!';
+      fb.className = 'q-feedback show err';
+      qDiv.className = 'quiz-q wrong';
+      return;
+    }
+
+    const chosen = parseInt(sel.value);
+    if (chosen === item.ans) {
+      score++;
+      fb.textContent = `✅ Correto! ${item.exp}`;
+      fb.className = 'q-feedback show ok';
+      qDiv.className = 'quiz-q correct';
+    } else {
+      fb.textContent = `❌ Incorreto. ${item.exp}`;
+      fb.className = 'q-feedback show err';
+      qDiv.className = 'quiz-q wrong';
+    }
+  });
+
+  const scoreEl = document.getElementById('quizScore');
+  const pct = Math.round((score / questions.length) * 100);
+  let emoji = pct >= 80 ? '🌸 Incrível!' : pct >= 60 ? '✨ Quase lá!' : '💪 Continue estudando!';
+  scoreEl.textContent = `Você acertou ${score} de ${questions.length} (${pct}%) — ${emoji}`;
+  scoreEl.className = 'quiz-score show';
+  scoreEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+buildQuiz();
+</script>
+</body>
+</html>
